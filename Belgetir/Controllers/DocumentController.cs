@@ -19,19 +19,17 @@ namespace Belgetir.Controllers
         }
 
         // GET: api/<DocumentController>
-        [HttpGet]
+        /*[HttpGet]
         public IEnumerable<IDocument> Get()
         {
             var documents = _documentLogic.RetrieveDocumentList();
             return documents;
-        }
+        }*/
 
         // GET api/<DocumentController>/5
-        [HttpGet("{id}")]
-        [HttpGet("{typeId}")]
+        [HttpGet("{id}/{typeId}")]
         public IDocument Get(int id, int typeId)
-        {
-            
+        {            
             var document = _documentLogic.RetrieveDocument(id, typeId);
             return document;
         }
