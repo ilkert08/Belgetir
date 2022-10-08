@@ -1,9 +1,11 @@
-﻿namespace Belgetir.DAL
+﻿using Belgetir.Models;
+
+namespace Belgetir.DAL
 {
     public interface ICrudOperations
     {
 
-        void Add();
+        Document Add(Document document);
         ICrudOperations Update();
         ICrudOperations Delete();
         ICrudOperations Get();

@@ -15,10 +15,16 @@ namespace Belgetir.DAL
 
 
 
-        public void Add()
+        public Document Add(Document document)
         {
-            var entity = _context.Add(new Document { Name = "BELGE1", Created = DateTime.Now, Data = "data"});
-            _context.SaveChanges();
+            document = new Document { Name = "BELGE1", Created = DateTime.Now, Data = "data" };
+            var entity = _context.Add(document);
+            int count = _context.SaveChanges();
+            if(count > 0)
+            {
+                return document;
+            }
+            return null;
         }
 
         public ICrudOperations Delete()

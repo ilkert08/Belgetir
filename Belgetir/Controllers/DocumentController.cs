@@ -1,9 +1,11 @@
-﻿using Belgetir.BLL;
+﻿using AutoMapper;
+using Belgetir.BLL;
 using Belgetir.Model;
+using Belgetir.Models.Requests;
+using Belgetir.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+// CREATE, STORE, RETRIEVE
 namespace Belgetir.Controllers
 {
     [Route("api/[controller]")]
@@ -13,9 +15,9 @@ namespace Belgetir.Controllers
 
         DocumentLogic _documentLogic;
 
-        public DocumentController()
+        public DocumentController(IMapper mapper)
         {
-            _documentLogic = new DocumentLogic();
+            _documentLogic = new DocumentLogic(mapper);
         }
 
         // GET: api/<DocumentController>
@@ -26,19 +28,21 @@ namespace Belgetir.Controllers
             return documents;
         }*/
 
-        // GET api/<DocumentController>/5
-        [HttpGet("{id}/{typeId}")]
-        public IDocument Get(int id, int typeId)
+        /*
+        // GET api/<DocumentController>/Get/id-typeId
+        [HttpGet("Get")]
+        public IDocument Get([FromQuery] int id, [FromQuery] int typeId)
         {            
             var document = _documentLogic.RetrieveDocument(id, typeId);
             return document;
-        }
+        } */
 
-        // POST api/<DocumentController>
+        // POST api/<DocumentController>/Store/
         [HttpPost]
-        public void Post([FromBody] IDocument value)
+        public StoreResponse Store([FromBody] StoreRequest request)
         {
-
+            StoreResponse response = _documentLogic.StoreDocument(request);
+            return response;
         }
 
         // PUT api/<DocumentController>/5
